@@ -21,14 +21,18 @@ public:
     ~MusicPlayer() override;
 
     void initui();
+
+    void connectSignalAndSlots();
 private slots:
     void on_quit_clicked();
+    void onBtFormClick(int pageId);
 
 protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mousePressEvent(QMouseEvent *event);
 private:
     Ui::MusicPlayer *ui;
+
 
     QPoint dragposition;
 };
