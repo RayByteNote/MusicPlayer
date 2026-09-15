@@ -5,6 +5,7 @@
 #include<QPushButton>
 #include<QMouseEvent>
 #include<QGraphicsDropShadowEffect>
+#include<random>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,6 +22,8 @@ public:
     ~MusicPlayer() override;
 
     void initui();
+
+    void randomPiction();
 
     void connectSignalAndSlots();
 private slots:
