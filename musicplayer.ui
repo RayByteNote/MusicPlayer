@@ -584,6 +584,9 @@ QPushButton:hover
                  <bool>true</bool>
                 </property>
                 <widget class="QWidget" name="scrollAreaWidgetContents">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
                  <property name="geometry">
                   <rect>
                    <x>0</x>

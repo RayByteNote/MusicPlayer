@@ -1,5 +1,7 @@
 #include "musicplayer.h"
 #include "ui_musicplayer.h"
+#include<QJsonObject>
+#include<QJsonArray>
 
 MusicPlayer::MusicPlayer(QWidget *parent)
     : QWidget(parent)
@@ -40,14 +42,16 @@ void MusicPlayer::initui()
     ui->local->showAnimation();
     ui->stackedWidget->setCurrentIndex(4);
 
-    randomPiction();
+
+    ui->recMusicBox->initRecBoxUi(randomPiction(),1);
+    ui->supplyMusicBox->initRecBoxUi(randomPiction(),2);
 }
 
-void MusicPlayer::randomPiction()
+QJsonArray MusicPlayer::randomPiction()
 {
     //推荐图片是随机的
     QVector<QString> vecImageName;
-    vecImageName<<"001.png"<<"002.png"<<"003.png"<<"004.png"<<"005.png"<<"006.png"<<"007.png"<<"008.png"<<"009.png"<<"010.png"<<"011.png"<<"012.png"<<"013.png"<<"014.png"
+    vecImageName<<"001.png"<<"003.png"<<"004.png"<<"005.png"<<"006.png"<<"007.png"<<"008.png"<<"009.png"<<"010.png"<<"011.png"<<"012.png"<<"013.png"<<"014.png"
                 <<"015.png"<<"016.png"<<"017.png"<<"018.png"<<"019.png"<<"020.png"<<"021.png"<<"022.png"<<"023.png"<<"024.png"<<"025.png"<<"026.png"<<"027.png"<<"028.png"
                  <<"029.png"<<"030.png"<<"031.png"<<"032.png"<<"033.png"<<"034.png"<<"035.png"<<"036.png"<<"037.png"<<"038.png"<<"039.png"<<"040.png";
 
@@ -55,6 +59,18 @@ void MusicPlayer::randomPiction()
     std::mt19937 g(rd());
     std::shuffle(vecImageName.begin(),vecImageName.end(),g);
 
+
+    QJsonArray objArray;
+    for(int i=0;i<vecImageName.size();i++)
+    {
+        QJsonObject obj;
+        obj.insert("path",":/images/rec/"+vecImageName[i]);
+
+        QString strText = QString("推荐-%1").arg(i+1,3,10,QChar('0'));
+        obj.insert("text",strText);
+        objArray.append(obj);
+    }
+    return objArray;
 }
 
 void MusicPlayer::connectSignalAndSlots()

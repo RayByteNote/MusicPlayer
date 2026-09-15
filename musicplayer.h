@@ -23,7 +23,7 @@ public:
 
     void initui();
 
-    void randomPiction();
+    QJsonArray randomPiction();
 
     void connectSignalAndSlots();
 private slots:

@@ -22,6 +22,9 @@ public:
     //设置图片
     void setRecImage(const QString& imagePath);
 
+
+
+
 private:
     Ui::recBoxItem *ui;
 };

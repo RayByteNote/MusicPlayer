@@ -71,14 +71,14 @@
          </sizepolicy>
         </property>
         <property name="styleSheet">
-         <string notr="true">background-color:rgb(65, 255, 67)</string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
-      <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignCenter">
+      <item row="0" column="0">
        <widget class="QPushButton" name="recMusicBtn">
         <property name="minimumSize">
          <size>
@@ -99,7 +99,6 @@
          <string notr="true">#recMusicBtn
 {
 	border:none;
-background-color:rgb(237, 255, 137)
 }</string>
         </property>
         <property name="text">
