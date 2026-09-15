@@ -20,7 +20,7 @@ public:
     int getpageId()const;
     void clearBackground();
 
-    void showAnimal();
+    void showAnimation();
 signals:
     void btClick(int id);
 protected:

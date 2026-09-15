@@ -37,7 +37,7 @@ void MusicPlayer::initui()
     ui->local->setIconAndText(":/images/local.png","本地下载",4);
     ui->recent->setIconAndText(":/images/recent.png","最近播放",5);
 
-    ui->local->showAnimal();
+    ui->local->showAnimation();
     ui->stackedWidget->setCurrentIndex(4);
 }
 
@@ -71,12 +71,12 @@ void MusicPlayer::onBtFormClick(int pageId)
     }
 
     ui->stackedWidget->setCurrentIndex(pageId);
-    if(pageId==0)ui->Rec->showAnimal();
-    if(pageId==1)ui->radio->showAnimal();
-    if(pageId==2)ui->music->showAnimal();
-    if(pageId==3)ui->like->showAnimal();
-    if(pageId==4)ui->local->showAnimal();
-    if(pageId==5)ui->recent->showAnimal();
+    if(pageId==0)ui->Rec->showAnimation();
+    if(pageId==1)ui->radio->showAnimation();
+    if(pageId==2)ui->music->showAnimation();
+    if(pageId==3)ui->like->showAnimation();
+    if(pageId==4)ui->local->showAnimation();
+    if(pageId==5)ui->recent->showAnimation();
 }
 
 void MusicPlayer::mouseMoveEvent(QMouseEvent *event)

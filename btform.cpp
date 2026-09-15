@@ -71,7 +71,7 @@ void BtForm::clearBackground()
     ui->lineBox->hide();
 }
 
-void BtForm::showAnimal()
+void BtForm::showAnimation()
 {
     ui->lineBox->show();
 }
