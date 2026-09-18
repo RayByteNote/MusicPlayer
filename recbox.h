@@ -35,6 +35,9 @@ private:
     int row;
     int col;
 
+    int currentIndex;
+    int count;
+
     QJsonArray imageList;
 };
 

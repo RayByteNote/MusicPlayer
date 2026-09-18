@@ -31,15 +31,34 @@ void recBox::initRecBoxUi(QJsonArray data, int row)
 
     imageList = data;
 
+    currentIndex = 0;
+    count = ceil(imageList.size()/col);
+
     //在RecBox控件添加RecBoxItem
     createRecBoxItem();
 }
 
 void recBox::createRecBoxItem()
 {
+    QList<recBoxItem*> recboxuplist = ui->recListUp->findChildren<recBoxItem*>();
+    for(auto e : recboxuplist)
+    {
+        ui->recListUpLayout->removeWidget(e);
+        delete e;
+    }
+
+    QList<recBoxItem*> recboxdownlist = ui->recListDown->findChildren<recBoxItem*>();
+    for(auto e : recboxdownlist)
+    {
+        ui->recListDownLayout->removeWidget(e);
+        delete e;
+    }
+
+
     //创建RecBoxItem对象，往RecBox中添加
     //col
-    for(int i=0;i<col;i++)
+    int index = 0;
+    for(int i=currentIndex*col;i<col+col*currentIndex;i++)
     {
         recBoxItem* item = new recBoxItem();
 
@@ -48,7 +67,7 @@ void recBox::createRecBoxItem()
         item->setRecText(obj.value("text").toString());
         item->setRecImage(obj.value("path").toString());
 
-        if(i>=col/2 && 2==row)
+        if(index>=col/2 && 2==row)
         {
             ui->recListDownLayout->addWidget(item);
         }
@@ -56,6 +75,8 @@ void recBox::createRecBoxItem()
         {
             ui->recListUpLayout->addWidget(item);
         }
+
+        ++index;
     }
 
 
@@ -63,12 +84,16 @@ void recBox::createRecBoxItem()
 
 void recBox::on_btDown_clicked()
 {
-
+    currentIndex++;
+    if(currentIndex>=count) currentIndex = 0;
+    createRecBoxItem();
 }
 
 
 void recBox::on_btUp_clicked()
 {
-
+    currentIndex--;
+    if(currentIndex<0) currentIndex=0;
+    createRecBoxItem();
 }
 
