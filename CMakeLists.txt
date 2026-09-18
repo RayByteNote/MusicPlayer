@@ -20,6 +20,7 @@ qt_add_executable(MusicPlayer
     btform.ui
     recbox.h recbox.cpp recbox.ui
     recboxitem.h recboxitem.cpp recboxitem.ui
+    commonpage.h commonpage.cpp commonpage.ui
 )
 
 target_link_libraries(MusicPlayer
