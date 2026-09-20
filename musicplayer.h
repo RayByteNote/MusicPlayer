@@ -31,11 +31,13 @@ private slots:
     void onBtFormClick(int pageId);
 
 protected:
-    void mouseMoveEvent(QMouseEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    void mouseMoveEvent(QMouseEvent *event)override;
+    void mousePressEvent(QMouseEvent *event)override;
+    void mouseReleaseEvent(QMouseEvent *event)override;
 private:
     Ui::MusicPlayer *ui;
 
+    bool isDragging = false;
 
     QPoint dragposition;
 };

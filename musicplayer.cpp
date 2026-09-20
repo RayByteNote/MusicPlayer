@@ -45,6 +45,10 @@ void MusicPlayer::initui()
 
     ui->recMusicBox->initRecBoxUi(randomPiction(),1);
     ui->supplyMusicBox->initRecBoxUi(randomPiction(),2);
+
+    ui->likepage->setCommonPageUI("我喜欢",":/images/ilikebg.png");
+    ui->localpage->setCommonPageUI("本地音乐",":/images/localbg.png");
+    ui->recentpage->setCommonPageUI("最近播放",":/images/recentbg.png");
 }
 
 QJsonArray MusicPlayer::randomPiction()
@@ -113,22 +117,28 @@ void MusicPlayer::onBtFormClick(int pageId)
 
 void MusicPlayer::mouseMoveEvent(QMouseEvent *event)
 {
-    if(event->buttons() == Qt::LeftButton)
+    if(!isDragging) return ;
+    if(event->buttons() & Qt::LeftButton)
     {
         move(event->globalPosition().toPoint()-dragposition);
-        qDebug()<<"mouse move";
         return ;
     }
-    QWidget::mouseMoveEvent(event);
 }
 
 void MusicPlayer::mousePressEvent(QMouseEvent *event)
 {
     if(Qt::LeftButton == event->button())
     {
+        isDragging = true;
+
         dragposition = event->globalPosition().toPoint() - geometry().topLeft();
-        return ;
-    }
-    QWidget::mousePressEvent(event);
+        event->accept();
+    }else event->ignore();
+}
+
+void MusicPlayer::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(event->button() == Qt::LeftButton) isDragging = false;
+    dragposition = {};
 }
 

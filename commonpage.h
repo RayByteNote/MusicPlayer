@@ -15,6 +15,8 @@ public:
     explicit CommonPage(QWidget *parent = nullptr);
     ~CommonPage();
 
+    void setCommonPageUI(const QString& title,const QString& image);
+
 private:
     Ui::CommonPage *ui;
 };
