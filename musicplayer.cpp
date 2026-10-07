@@ -49,6 +49,8 @@ void MusicPlayer::initui()
     ui->likepage->setCommonPageUI("我喜欢",":/images/ilikebg.png");
     ui->localpage->setCommonPageUI("本地音乐",":/images/localbg.png");
     ui->recentpage->setCommonPageUI("最近播放",":/images/recentbg.png");
+
+    volumeTool = new VolumeTool(this);
 }
 
 QJsonArray MusicPlayer::randomPiction()
@@ -140,5 +142,21 @@ void MusicPlayer::mouseReleaseEvent(QMouseEvent *event)
 {
     if(event->button() == Qt::LeftButton) isDragging = false;
     dragposition = {};
+}
+
+
+void MusicPlayer::on_volume_clicked()
+{
+    //获取ui->volume控件的left-top坐标，转换为基于屏幕的全局坐标
+    QPoint point = ui->volume->mapToGlobal(QPoint(0,0));
+
+    //计算volumeTool需要移动的位置
+    QPoint volumeLeftTop = point - QPoint(volumeTool->width()/2,volumeTool->height());
+
+    volumeLeftTop.setX(volumeLeftTop.x()+15);
+    volumeLeftTop.setY(volumeLeftTop.y()+30);
+    //移动
+    volumeTool->move(volumeLeftTop);
+    volumeTool->show();
 }
 

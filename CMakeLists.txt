@@ -22,6 +22,8 @@ qt_add_executable(MusicPlayer
     recboxitem.h recboxitem.cpp recboxitem.ui
     commonpage.h commonpage.cpp commonpage.ui
     listitembox.h listitembox.cpp listitembox.ui
+    musicslider.h musicslider.cpp musicslider.ui
+    volumetool.h volumetool.cpp volumetool.ui
 )
 
 target_link_libraries(MusicPlayer

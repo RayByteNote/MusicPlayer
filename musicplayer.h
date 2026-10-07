@@ -6,6 +6,7 @@
 #include<QMouseEvent>
 #include<QGraphicsDropShadowEffect>
 #include<random>
+#include"volumetool.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,6 +31,8 @@ private slots:
     void on_quit_clicked();
     void onBtFormClick(int pageId);
 
+    void on_volume_clicked();
+
 protected:
     void mouseMoveEvent(QMouseEvent *event)override;
     void mousePressEvent(QMouseEvent *event)override;
@@ -40,5 +43,7 @@ private:
     bool isDragging = false;
 
     QPoint dragposition;
+
+    VolumeTool* volumeTool;
 };
 #endif // MUSICPLAYER_H
