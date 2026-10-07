@@ -2,6 +2,7 @@
 #include "ui_musicplayer.h"
 #include<QJsonObject>
 #include<QJsonArray>
+#include<QFileDialog>
 
 MusicPlayer::MusicPlayer(QWidget *parent)
     : QWidget(parent)
@@ -158,5 +159,44 @@ void MusicPlayer::on_volume_clicked()
     //移动
     volumeTool->move(volumeLeftTop);
     volumeTool->show();
+}
+
+
+void MusicPlayer::on_addlocal_clicked()
+{
+    QFileDialog fileDialog(this);
+
+    //设置窗口标题
+    fileDialog.setWindowTitle("添加本地音乐");
+    //设置显示目录
+    QDir dir(QDir::currentPath());
+    dir.cdUp();
+    dir.cdUp();
+    dir.cdUp();
+    dir.cdUp();
+    dir.cdUp();
+    QString projectPath = dir.path();
+    qDebug()<<projectPath;
+    fileDialog.setDirectory(projectPath);
+    //设置一次打开多个文件
+    fileDialog.setFileMode(QFileDialog::ExistingFiles);
+
+    //通过文件后缀过滤
+    //fileDialog.setNameFilter("mp3文件(*.mp3)");
+
+    //通过文件的MIME类型过滤
+    QStringList mimetype;
+    mimetype << "audio/mpeg";
+    fileDialog.setMimeTypeFilters(mimetype);
+
+    if(QDialog::Accepted == fileDialog.exec())
+    {
+        //获取选中的文件
+        QList<QUrl> fileUrls = fileDialog.selectedUrls();
+
+        //将Url填充到本地下载
+
+    }
+
 }
 

@@ -33,6 +33,8 @@ private slots:
 
     void on_volume_clicked();
 
+    void on_addlocal_clicked();
+
 protected:
     void mouseMoveEvent(QMouseEvent *event)override;
     void mousePressEvent(QMouseEvent *event)override;
