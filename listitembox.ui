@@ -61,6 +61,13 @@
           <height>25</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true">#likebtn
+{
+	border:none;
+	
+}</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -171,7 +178,7 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QLabel" name="musicSIngerLabel">
+       <widget class="QLabel" name="musicSingerLabel">
         <property name="text">
          <string>哈哈哈</string>
         </property>

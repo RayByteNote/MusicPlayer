@@ -47,8 +47,11 @@ void MusicPlayer::initui()
     ui->recMusicBox->initRecBoxUi(randomPiction(),1);
     ui->supplyMusicBox->initRecBoxUi(randomPiction(),2);
 
+    ui->likepage->setMusicListType(LIKE_PAGE);
     ui->likepage->setCommonPageUI("我喜欢",":/images/ilikebg.png");
+    ui->localpage->setMusicListType(LOCAL_PAGE);
     ui->localpage->setCommonPageUI("本地音乐",":/images/localbg.png");
+    ui->recentpage->setMusicListType(HISTORY_PAGE);
     ui->recentpage->setCommonPageUI("最近播放",":/images/recentbg.png");
 
     volumeTool = new VolumeTool(this);
@@ -186,7 +189,7 @@ void MusicPlayer::on_addlocal_clicked()
 
     //通过文件的MIME类型过滤
     QStringList mimetype;
-    mimetype << "audio/mpeg";
+    mimetype << "application/octet-stream";//保证没有文件遗漏,musiclist中有做过滤
     fileDialog.setMimeTypeFilters(mimetype);
 
     if(QDialog::Accepted == fileDialog.exec())
@@ -195,7 +198,13 @@ void MusicPlayer::on_addlocal_clicked()
         QList<QUrl> fileUrls = fileDialog.selectedUrls();
 
         //将Url填充到本地下载
+        musiclist.addMusicByUrl(fileUrls);
 
+
+        //将commonpage切换到本地下载页
+        ui->stackedWidget->setCurrentIndex(4);
+
+        ui->localpage->reFresh(musiclist);
     }
 
 }

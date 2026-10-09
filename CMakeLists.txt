@@ -4,7 +4,7 @@ project(MusicPlayer LANGUAGES CXX)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Multimedia)
 
 qt_standard_project_setup()
 
@@ -24,12 +24,15 @@ qt_add_executable(MusicPlayer
     listitembox.h listitembox.cpp listitembox.ui
     musicslider.h musicslider.cpp musicslider.ui
     volumetool.h volumetool.cpp volumetool.ui
+    musiclist.h musiclist.cpp
+    music.h music.cpp
 )
 
 target_link_libraries(MusicPlayer
     PRIVATE
         Qt::Core
         Qt::Widgets
+        Qt6::Multimedia
 )
 
 install(TARGETS MusicPlayer

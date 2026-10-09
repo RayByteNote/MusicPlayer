@@ -7,6 +7,7 @@
 #include<QGraphicsDropShadowEffect>
 #include<random>
 #include"volumetool.h"
+#include"musiclist.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -47,5 +48,7 @@ private:
     QPoint dragposition;
 
     VolumeTool* volumeTool;
+
+    MusicList musiclist;
 };
 #endif // MUSICPLAYER_H
