@@ -7,6 +7,7 @@ CommonPage::CommonPage(QWidget *parent)
     , ui(new Ui::CommonPage)
 {
     ui->setupUi(this);
+    ui->pageMusicList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 CommonPage::~CommonPage()
@@ -33,6 +34,7 @@ void CommonPage::setMusicListType(enum PageType PageType)
 
 void CommonPage::addMusicToMusicPage(MusicList &musicList)
 {
+    musicOfPage.clear();
     for(auto& music : musicList)
     {
         switch(PageType)
@@ -44,7 +46,7 @@ void CommonPage::addMusicToMusicPage(MusicList &musicList)
             }
             break;
         case LOCAL_PAGE:
-            musicOfPage.push_back(music->getMusicId());
+                musicOfPage.push_back(music->getMusicId());
             break;
         case HISTORY_PAGE:
             if(music->getIsHistory())
@@ -61,11 +63,10 @@ void CommonPage::addMusicToMusicPage(MusicList &musicList)
 //将歌曲信息更新到界面
 void CommonPage::reFresh(MusicList &musicList)
 {
-    musicOfPage.clear();
     ui->pageMusicList->clear();
     addMusicToMusicPage(musicList);
 
-    for(auto musicId : musicOfPage)
+    for(auto &musicId : musicOfPage)
     {
         auto it = musicList.findMusicByMusicId(musicId);
         if(it ==musicList.end())
@@ -80,6 +81,7 @@ void CommonPage::reFresh(MusicList &musicList)
             row->setMusicName(music->getMusicName());
             row->setMusicSinger(music->getMusicSinger());
             row->setMusicAlbum(music->getMusicAlbumn());
+            row->setLikeMusic(music->getIsLike());
         };
         connect(music, &Music::metaDataReady, row, updateText);
         updateText();
@@ -87,5 +89,10 @@ void CommonPage::reFresh(MusicList &musicList)
         QListWidgetItem* item = new QListWidgetItem(ui->pageMusicList);
         item->setSizeHint(QSize(row->width(),row->height()));
         ui->pageMusicList->setItemWidget(item,row);
+
+        connect(row,&listItemBox::setIslike,this,[=](bool isLike){
+            emit upDateLikeMusic(isLike,music->getMusicId());
+        });
     }
+    repaint();
 }

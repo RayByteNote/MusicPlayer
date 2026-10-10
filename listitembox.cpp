@@ -6,9 +6,12 @@
 listItemBox::listItemBox(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::listItemBox)
+    ,isLike(false)
 {
     ui->setupUi(this);
     setAttribute(Qt::WA_StyledBackground, true);   // 保证背景由样式表绘制
+
+    connect(ui->likebtn,&QPushButton::clicked,this,&listItemBox::onLikeBtnClicked);
 }
 
 listItemBox::~listItemBox()
@@ -44,4 +47,24 @@ void listItemBox::setMusicAlbum(const QString &musicAlbum)
 {
     ui->musicAlbumLabel->setText(musicAlbum);
     ui->musicAlbumLabel->setStyleSheet("color:black;");
+}
+
+void listItemBox::setLikeMusic(bool isLike)
+{
+    this->isLike=isLike;
+    if(isLike)
+    {
+        ui->likebtn->setIcon(QIcon(":/images/like_2.png"));
+    }
+    else
+    {
+        ui->likebtn->setIcon(QIcon(":/images/like_3.png"));
+    }
+}
+
+void listItemBox::onLikeBtnClicked()
+{
+    this->isLike = !isLike;
+    setLikeMusic(isLike);
+    emit setIslike(isLike);
 }

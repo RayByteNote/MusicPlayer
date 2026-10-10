@@ -36,6 +36,8 @@ private slots:
 
     void on_addlocal_clicked();
 
+    void upDateLikeMusicAndPage(bool isLike,const QString &musicId);
+
 protected:
     void mouseMoveEvent(QMouseEvent *event)override;
     void mousePressEvent(QMouseEvent *event)override;

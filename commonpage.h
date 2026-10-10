@@ -30,6 +30,8 @@ public:
     void addMusicToMusicPage(MusicList &musicList);
 
     void reFresh(MusicList &musicList);
+signals:
+    void upDateLikeMusic(bool,const QString&);
 private:
     Ui::CommonPage *ui;
 

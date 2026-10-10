@@ -7,6 +7,7 @@
 MusicPlayer::MusicPlayer(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MusicPlayer)
+    ,musiclist()
 {
     ui->setupUi(this);
     initui();
@@ -92,6 +93,11 @@ void MusicPlayer::connectSignalAndSlots()
     connect(ui->like,&BtForm::btClick,this,&MusicPlayer::onBtFormClick);
     connect(ui->local,&BtForm::btClick,this,&MusicPlayer::onBtFormClick);
     connect(ui->recent,&BtForm::btClick,this,&MusicPlayer::onBtFormClick);
+
+    //处理收藏
+    connect(ui->localpage,&CommonPage::upDateLikeMusic,this,&MusicPlayer::upDateLikeMusicAndPage);
+    connect(ui->likepage,&CommonPage::upDateLikeMusic,this,&MusicPlayer::upDateLikeMusicAndPage);
+    connect(ui->recentpage,&CommonPage::upDateLikeMusic,this,&MusicPlayer::upDateLikeMusicAndPage);
 }
 
 void MusicPlayer::on_quit_clicked()
@@ -177,7 +183,6 @@ void MusicPlayer::on_addlocal_clicked()
     dir.cdUp();
     dir.cdUp();
     dir.cdUp();
-    dir.cdUp();
     QString projectPath = dir.path();
     qDebug()<<projectPath;
     fileDialog.setDirectory(projectPath);
@@ -207,5 +212,20 @@ void MusicPlayer::on_addlocal_clicked()
         ui->localpage->reFresh(musiclist);
     }
 
+}
+
+void MusicPlayer::upDateLikeMusicAndPage(bool isLike, const QString &musicId)
+{
+    //修改状态
+    auto it = musiclist.findMusicByMusicId(musicId);
+    if(it != musiclist.end())
+    {
+        auto music = *it;
+        music->setIsLike(isLike);
+    }
+
+    ui->likepage->reFresh(musiclist);
+    ui->recentpage->reFresh(musiclist);
+    ui->localpage->reFresh(musiclist);
 }
 

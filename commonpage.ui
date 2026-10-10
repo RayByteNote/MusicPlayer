@@ -248,7 +248,18 @@
     </widget>
    </item>
    <item>
-    <widget class="QListWidget" name="pageMusicList"/>
+    <widget class="QListWidget" name="pageMusicList">
+     <property name="styleSheet">
+      <string notr="true">/*::item表⽰⼦控件，即ListItemBox ：selected: 
+表⽰选中*/
+#pageMusicList::item:selected 
+{
+background-color:#EFEFEF;
+}
+
+</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
